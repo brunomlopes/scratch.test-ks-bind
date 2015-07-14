@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<script type="text/javascript" src="bower_components/knockout/dist/knockout.debug.js"></script>
+	<script type="text/javascript" src="bower_components/domready/ready.js"></script>
+	<script type="text/javascript" src="dist/index.js"></script>
+</head>
+<body>
+<div id="container">
+	<span data-bind="click:clickOnThis">click for 1</span>
+</div>
+<div id="anothercontainer">
+	<span data-bind="click:clickOnThis">click for 2</span>
+</div>
+<div id="yetanothercontainer">
+	
+	<span data-bind="text: ko.toJSON(myArray)"></span>
+	<h2>Issues with this scoping when using a regular Function</h2>
+	<ul data-bind="foreach: myArray">
+	  <li>
+	    <a href="#" data-bind="text: $data, click: $parent.removeFromArray"></a>
+	  </li>
+	</ul>
+
+</div>
+<div id="containerredux">
+	
+	<span data-bind="text: ko.toJSON(myArray)"></span>
+	<h2>Issues with this scoping when using a regular Function</h2>
+	<ul data-bind="foreach: myArray">
+	  <li>
+	    <a href="#" data-bind="text: $data, click: $parent.removeFromArray"></a>
+	  </li>
+	</ul>
+</div>
+
+<div id="megacontainer">
+	
+</div>
+<script type="text/javascript">
+	domready(function () {
+	  	ko.applyBindings(new Person(1), document.getElementById("container"))
+	  	ko.applyBindings(new Person(2), document.getElementById("anothercontainer"))
+	})
+	var cnt = 6;
+	var pointWithBindList = []
+	for (var i = 0; i < cnt; i++) {
+		pointWithBindList.push(new PointWithBind([i,i+1,i+2,i+3]));
+	}
+	var pointWithArrowFunction = []
+	for (var i = 0; i < cnt; i++) {
+		pointWithArrowFunction.push(new PointWithArrowFunction([i,i+1,i+2,i+3]));
+	}
+	var pointWithMethod = []
+	for (var i = 0; i < cnt; i++) {
+		pointWithMethod.push(new PointWithMethod([i,i+1,i+2,i+3]));
+	}
+
+	
+</script>
+</body>
+</html>
